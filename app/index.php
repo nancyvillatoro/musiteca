@@ -124,9 +124,8 @@ $ubicaciones = $pdo->query('SELECT id, nombre FROM ubicaciones ORDER BY nombre')
           <div class="invalid-feedback">Ingresa el código de inventario.</div>
         </div>
         <div class="mb-2">
-          <label class="form-label small fw-semibold" for="appNumInventarioAnterior">Código anterior (num_inv_anterior) *</label>
-          <input type="text" class="form-control" id="appNumInventarioAnterior" name="num_inventario_anterior" data-obligatorio="true" aria-required="true">
-          <div class="invalid-feedback">Ingresa el código de inventario anterior.</div>
+          <label class="form-label small fw-semibold" for="appNumInventarioAnterior">Código anterior (num_inv_anterior)</label>
+          <input type="text" class="form-control" id="appNumInventarioAnterior" name="num_inventario_anterior" placeholder="Opcional">
         </div>
         <div class="mb-2">
           <label class="form-label small fw-semibold" for="appNombreInstrumento">Nombre del instrumento *</label>

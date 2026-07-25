@@ -167,15 +167,19 @@ switch ($accion) {
         $estado                 = $_POST['estado'] ?? 'disponible';
 
         // El manual de referencia (sección 3.7) exige capturar los 8 campos
-        // del expediente del instrumento como obligatorios (num_inventario,
-        // num_inventario_anterior, nombre, marca, modelo, num_serie,
-        // ubicacion_id y condicion); antes solo se exigían 3. Se valida aquí
-        // en el servidor porque data-obligatorio en el formulario (index.php
-        // / app/index.php) es una ayuda de UX, no una garantía: cualquier
+        // del expediente del instrumento como obligatorios; antes solo se
+        // exigían 3. Se exigen ahora también marca, modelo y número de
+        // serie. num_inventario_anterior se deja fuera a propósito: ese
+        // campo solo aplica a instrumentos que ya tenían un número bajo un
+        // esquema de numeración previo, así que forzarlo en instrumentos
+        // genuinamente nuevos (que nunca tuvieron un número anterior)
+        // llevaría a capturar valores basura ("N/A", "-") solo para poder
+        // guardar, en vez de mejorar la calidad del dato. Se valida aquí en
+        // el servidor porque data-obligatorio en el formulario (index.php /
+        // app/index.php) es una ayuda de UX, no una garantía: cualquier
         // petición directa al endpoint debe respetar la misma regla.
         $camposFaltantes = [];
         if ($numInventario === '') $camposFaltantes[] = 'número de inventario';
-        if ($numInventarioAnterior === '') $camposFaltantes[] = 'número de inventario anterior';
         if ($nombre === '') $camposFaltantes[] = 'nombre';
         if ($marca === '') $camposFaltantes[] = 'marca';
         if ($modelo === '') $camposFaltantes[] = 'modelo';

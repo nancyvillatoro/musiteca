@@ -286,9 +286,8 @@ require __DIR__ . '/includes/sidebar.php';
               <div class="invalid-feedback">Ingresa el número de inventario.</div>
             </div>
             <div class="col-md-6">
-              <label class="form-label small fw-semibold" for="numInventarioAnterior">N° de inventario anterior *</label>
-              <input type="text" class="form-control" name="num_inventario_anterior" id="numInventarioAnterior" data-obligatorio="true" aria-required="true">
-              <div class="invalid-feedback">Ingresa el número de inventario anterior.</div>
+              <label class="form-label small fw-semibold" for="numInventarioAnterior">N° de inventario anterior</label>
+              <input type="text" class="form-control" name="num_inventario_anterior" id="numInventarioAnterior">
             </div>
             <div class="col-md-12">
               <label class="form-label small fw-semibold" for="nombreInstrumento">Nombre del instrumento *</label>
