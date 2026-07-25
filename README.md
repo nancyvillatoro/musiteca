@@ -48,13 +48,37 @@ assets/
 api/
 app/
 database/
-scripts/          <- utilidades de línea de comandos (crear_admin.php)
+scripts/          <- utilidades de línea de comandos (crear_admin.php,
+                     pruebas/ para las pruebas de integración)
 uploads/
 login.php
 logout.php
 index.php
 soporte.php
 ```
+
+---
+
+# Pruebas
+
+La lógica de negocio más sensible (préstamos y devoluciones, con sus
+transacciones y bloqueos de fila) vive en `includes/servicios/` en vez de
+directamente en los controladores de `api/`, siguiendo el mismo patrón que
+`usuarios_servicio.php`. Esto permite probarla de forma aislada, sin pasar
+por una petición HTTP real.
+
+Para correr las pruebas de préstamos/devoluciones:
+
+```
+php scripts/pruebas/test_prestamos_servicio.php
+```
+
+El script crea (o recrea) una base de datos de pruebas separada —
+`musiteca_test` por defecto— y nunca toca la base `musiteca` real: se niega
+a ejecutarse si detecta que el nombre resuelto es `musiteca`. Usa las
+variables de entorno `MUSITECA_TEST_DB_HOST` / `MUSITECA_TEST_DB_NAME` /
+`MUSITECA_TEST_DB_USER` / `MUSITECA_TEST_DB_PASS` para apuntar a otra base
+si lo necesitas.
 
 ---
 
