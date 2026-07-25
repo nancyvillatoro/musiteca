@@ -260,10 +260,13 @@ a:focus-visible {
 }
 
 /* ---------- Franja de estado de inventario (mini-stats): información de
-   referencia (patrimonio total, asignados, mantenimiento), útil pero no
-   accionable a diario. Vive en un único bloque de menor peso visual —
-   sin sombra ni tarjetas independientes — para no competir con el KPI
-   principal ni con los avisos operativos. ---------- */
+   referencia (patrimonio total, asignados, mantenimiento). Vive en un
+   único bloque de menor peso visual que el KPI principal — sin sombra ni
+   tarjetas independientes — para no competir con él ni con los avisos
+   operativos. "Actualmente asignados" y "En mantenimiento" sí llevan a
+   Movimientos filtrado por ese estado (mismo patrón que "Ver préstamos
+   vencidos" en el aviso operativo); "Patrimonio total" es solo lectura,
+   por eso es el único que se queda como <div>. ---------- */
 .kpi-mini-row {
   display: flex;
   height: 100%;
@@ -278,13 +281,73 @@ a:focus-visible {
   min-width: 0;
   padding: 0.9rem 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.65rem;
   border-right: 1px solid var(--musiteca-borde);
+  /* Reset de estilos por defecto de <button>: dos de las tres tarjetas son
+     botones (llevan a Movimientos filtrado), pero deben verse idénticas a
+     la tarjeta de solo lectura. */
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: default;
+  width: auto;
 }
 
 .kpi-mini:last-child {
   border-right: none;
+}
+
+button.kpi-mini-clicable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button.kpi-mini-clicable:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+button.kpi-mini-clicable:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--musiteca-guinda-claro);
+}
+
+.kpi-mini-icon {
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.kpi-mini-icon-neutro {
+  background-color: #fff;
+  border: 1px solid var(--musiteca-borde);
+  color: var(--musiteca-gris-muted);
+}
+
+.kpi-mini-icon-ambar {
+  background-color: var(--musiteca-ambar-alfa);
+  color: var(--musiteca-ambar);
+}
+
+.kpi-mini-icon-rojo {
+  background-color: var(--musiteca-rojo-alfa);
+  color: var(--musiteca-rojo);
+}
+
+.kpi-mini-texto {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .kpi-mini-value {
@@ -447,7 +510,8 @@ a:focus-visible {
   }
 
   .filtros-controles .form-select,
-  .filtro-fecha-grupo {
+  .filtro-fecha-grupo,
+  .filtros-controles .btn {
     flex: 1 1 auto;
   }
 
@@ -1336,6 +1400,12 @@ a:focus-visible {
   }
   .kpi-mini {
     padding: 0.7rem 0.6rem;
+    gap: 0.45rem;
+  }
+  .kpi-mini-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.85rem;
   }
   .modal-footer {
     flex-direction: column-reverse;

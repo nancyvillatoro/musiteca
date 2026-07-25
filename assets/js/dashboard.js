@@ -142,15 +142,36 @@
     avisoSoporte.classList.remove('d-none');
   }
 
+  // Cambia a la pestaña Movimientos con el filtro de estado preseleccionado.
+  // Punto único para todo lo que en el panel principal significa "ver estos
+  // instrumentos en Movimientos": el aviso de vencidos y las tarjetas mini
+  // de "Actualmente asignados" / "En mantenimiento" comparten exactamente
+  // el mismo comportamiento, así que no tiene sentido repetirlo tres veces.
+  function irAMovimientosFiltrado(estado) {
+    const tabControl = document.getElementById('tabControlBtn');
+    const filtroEstado = document.getElementById('filtroEstado');
+    if (filtroEstado) filtroEstado.value = estado;
+    if (tabControl) tabControl.click(); // reutiliza el cambio de pestaña ya existente en main.js
+    else if (window.cargarControl) window.cargarControl(1);
+  }
+
   const btnVerVencidos = document.getElementById('btnVerVencidos');
   if (btnVerVencidos) {
-    btnVerVencidos.addEventListener('click', () => {
-      const tabControl = document.getElementById('tabControlBtn');
-      const filtroEstado = document.getElementById('filtroEstado');
-      if (filtroEstado) filtroEstado.value = 'vencido';
-      if (tabControl) tabControl.click(); // reutiliza el cambio de pestaña ya existente en main.js
-      else if (window.cargarControl) window.cargarControl(1);
-    });
+    btnVerVencidos.addEventListener('click', () => irAMovimientosFiltrado('vencido'));
+  }
+
+  // Tarjetas mini del panel principal: "Actualmente asignados" y "En
+  // mantenimiento" son atajos directos a Movimientos ya filtrado por ese
+  // estado. "Patrimonio total" no tiene un filtro equivalente en Movimientos
+  // (es el conteo del catálogo completo), por eso se queda como texto simple.
+  const kpiMiniEnUso = document.getElementById('kpiMiniEnUso');
+  if (kpiMiniEnUso) {
+    kpiMiniEnUso.addEventListener('click', () => irAMovimientosFiltrado('en_uso'));
+  }
+
+  const kpiMiniMantenimiento = document.getElementById('kpiMiniMantenimiento');
+  if (kpiMiniMantenimiento) {
+    kpiMiniMantenimiento.addEventListener('click', () => irAMovimientosFiltrado('en_reparacion'));
   }
 
   if (!hayPanelOperativo) return;

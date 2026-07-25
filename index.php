@@ -110,17 +110,26 @@ require __DIR__ . '/includes/sidebar.php';
       <div class="col-12 col-lg-7">
         <div class="kpi-mini-row">
           <div class="kpi-mini" title="Instrumentos activos en el catálogo del CEMUART">
-            <span class="kpi-mini-value" id="kpiTotal"><?= (int)$kpis['total'] ?></span>
-            <span class="kpi-mini-label">Patrimonio total</span>
+            <span class="kpi-mini-icon kpi-mini-icon-neutro"><i class="bi bi-collection" aria-hidden="true"></i></span>
+            <span class="kpi-mini-texto">
+              <span class="kpi-mini-value" id="kpiTotal"><?= (int)$kpis['total'] ?></span>
+              <span class="kpi-mini-label">Patrimonio total</span>
+            </span>
           </div>
-          <div class="kpi-mini">
-            <span class="kpi-mini-value" id="kpiEnUso"><?= (int)$kpis['en_uso'] ?></span>
-            <span class="kpi-mini-label">Actualmente asignados</span>
-          </div>
-          <div class="kpi-mini">
-            <span class="kpi-mini-value" id="kpiReparacion"><?= (int)$kpis['en_reparacion'] ?></span>
-            <span class="kpi-mini-label">En mantenimiento</span>
-          </div>
+          <button type="button" class="kpi-mini kpi-mini-clicable" id="kpiMiniEnUso" title="Ver estos instrumentos en Movimientos">
+            <span class="kpi-mini-icon kpi-mini-icon-ambar"><i class="bi bi-arrow-left-right" aria-hidden="true"></i></span>
+            <span class="kpi-mini-texto">
+              <span class="kpi-mini-value" id="kpiEnUso"><?= (int)$kpis['en_uso'] ?></span>
+              <span class="kpi-mini-label">Actualmente asignados</span>
+            </span>
+          </button>
+          <button type="button" class="kpi-mini kpi-mini-clicable" id="kpiMiniMantenimiento" title="Ver estos instrumentos en Movimientos">
+            <span class="kpi-mini-icon kpi-mini-icon-rojo"><i class="bi bi-tools" aria-hidden="true"></i></span>
+            <span class="kpi-mini-texto">
+              <span class="kpi-mini-value" id="kpiReparacion"><?= (int)$kpis['en_reparacion'] ?></span>
+              <span class="kpi-mini-label">En mantenimiento</span>
+            </span>
+          </button>
         </div>
       </div>
     </div>
@@ -160,13 +169,11 @@ require __DIR__ . '/includes/sidebar.php';
                 <option value="malo">Malo</option>
                 <option value="inservible">Inservible</option>
               </select>
+              <button class="btn btn-outline-secondary" id="btnLimpiarInventario" title="Quitar búsqueda y filtro"><i class="bi bi-eraser"></i> Limpiar</button>
             </div>
             <div class="filtros-acciones">
               <?php if (esAdministrador()): ?>
               <button class="btn btn-primary-musiteca" data-bs-toggle="modal" data-bs-target="#modalNuevoInstrumento"><i class="bi bi-plus-lg"></i> Registrar instrumento</button>
-              <?php endif; ?>
-              <button class="btn btn-outline-secondary" id="btnLimpiarInventario"><i class="bi bi-eraser"></i> Limpiar</button>
-              <?php if (esAdministrador()): ?>
               <button class="btn btn-oro-musiteca" id="btnExportarInventario"><i class="bi bi-file-earmark-excel"></i> Descargar reporte</button>
               <?php endif; ?>
             </div>
@@ -220,10 +227,10 @@ require __DIR__ . '/includes/sidebar.php';
                 <span class="filtro-fecha-etiqueta">Hasta</span>
                 <input type="date" id="filtroFechaFin" class="form-control">
               </div>
+              <button class="btn btn-outline-secondary" id="btnLimpiarControl" title="Quitar búsqueda y filtros"><i class="bi bi-eraser"></i> Limpiar</button>
             </div>
             <div class="filtros-acciones">
               <button class="btn btn-primary-musiteca" id="btnNuevoPrestamo"><i class="bi bi-plus-lg"></i> Nuevo préstamo</button>
-              <button class="btn btn-outline-secondary" id="btnLimpiarControl"><i class="bi bi-eraser"></i> Limpiar</button>
               <?php if (esAdministrador()): ?>
               <button class="btn btn-oro-musiteca" id="btnExportarControl"><i class="bi bi-file-earmark-excel"></i> Descargar reporte</button>
               <?php endif; ?>
