@@ -449,9 +449,16 @@ button.kpi-mini-clicable:focus-visible {
   border-color: var(--musiteca-guinda-claro);
 }
 
-/* Buscador: más ancho para que el placeholder no se corte */
+/* Buscador: ocupa siempre su propia línea completa. Antes competía por
+   ancho con .filtros-controles y .filtros-acciones en la misma fila
+   (flex: 2 1 340px); a anchos intermedios eso los dejaba tan apretados
+   que .filtros-controles terminaba partiéndose internamente (el select
+   arriba, el botón "Limpiar" abajo), en vez de que la barra completa
+   bajara de línea de forma ordenada. Al reservarle toda la primera línea,
+   controles y acciones siempre comparten la segunda línea con el ancho
+   completo de la barra disponible para ellos. */
 .filtros-buscador {
-  flex: 2 1 340px;
+  flex: 1 1 100%;
   min-width: 280px;
 }
 
@@ -460,6 +467,14 @@ button.kpi-mini-clicable:focus-visible {
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 0.85rem;
+}
+
+/* Cuando no hay .filtros-acciones (p. ej. Instrumentos dados de baja),
+   .filtros-controles es el último grupo de la barra: se alinea a la
+   derecha igual que lo haría .filtros-acciones, en vez de quedar pegado
+   al margen izquierdo bajo el buscador. */
+.filtros-controles:last-child {
+  margin-left: auto;
 }
 
 .filtros-controles .form-select {
