@@ -22,6 +22,7 @@ $ubicaciones = $pdo->query('SELECT id, nombre FROM ubicaciones ORDER BY nombre')
   <link href="../assets/css/style.css" rel="stylesheet">
   <script>
     window.ES_ADMIN = <?= json_encode(esAdministrador()) ?>;
+    window.USUARIO_NOMBRE = <?= json_encode($_SESSION['usuario_nombre'] ?? '') ?>;
   </script>
 </head>
 <body class="bg-light">
@@ -242,8 +243,11 @@ $ubicaciones = $pdo->query('SELECT id, nombre FROM ubicaciones ORDER BY nombre')
           <input type="hidden" name="instrumento_id" id="reportarAppId">
           <div class="mb-2">
             <label class="form-label small fw-semibold" for="appReportarPor">Reportado por *</label>
-            <input type="text" class="form-control" id="appReportarPor" name="reportado_por" data-obligatorio="true" aria-required="true">
-            <div class="invalid-feedback">Indica quién reporta el problema.</div>
+            <div class="input-group">
+              <input type="text" class="form-control" id="appReportarPor" name="reportado_por" data-obligatorio="true" aria-required="true">
+              <button type="button" class="btn btn-outline-secondary" id="btnReportarPorFuiYoApp" title="Usar mi nombre">Fui yo</button>
+              <div class="invalid-feedback">Indica quién reporta el problema.</div>
+            </div>
           </div>
           <div class="mb-2">
             <label class="form-label small fw-semibold" for="appReportarMotivo">Motivo *</label>

@@ -46,6 +46,22 @@
   modalDevolucionEl.addEventListener('show.bs.modal', () => limpiarValidacion(formDevolucion));
   modalReportarEl.addEventListener('show.bs.modal', () => limpiarValidacion(formReportar));
 
+  // "Fui yo": autocompleta con el nombre de quien tiene la sesión abierta,
+  // para el caso más común (el mismo operador detecta y reporta el
+  // problema). El campo sigue siendo de texto libre para cuando quien
+  // reporta es alguien externo (solicitante, maestro, alumno) sin cuenta
+  // en el sistema.
+  const btnReportarPorFuiYo = document.getElementById('btnReportarPorFuiYo');
+  const campoReportarPor = document.getElementById('reportarPor');
+  if (btnReportarPorFuiYo && campoReportarPor) {
+    btnReportarPorFuiYo.addEventListener('click', () => {
+      campoReportarPor.value = window.USUARIO_NOMBRE || '';
+      campoReportarPor.classList.remove('is-invalid');
+      campoReportarPor.removeAttribute('aria-invalid');
+      campoReportarPor.focus();
+    });
+  }
+
   const badgeEstado = (valor, vencido) => {
     if (vencido) {
       return '<span class="badge-estado badge-en_reparacion"><i class="bi bi-alarm"></i> Vencido</span>';

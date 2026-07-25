@@ -21,6 +21,21 @@
     guardReportarApp = protegerFormularioConCambios(document.getElementById('formReportarApp'), document.getElementById('modalReportarApp'));
   }
 
+  // "Fui yo": autocompleta "Reportado por" con el nombre de quien tiene la
+  // sesión abierta (mismo criterio que en el panel de escritorio, ver
+  // assets/js/control.js). Sigue siendo texto libre para cuando el reporte
+  // viene de alguien sin cuenta en el sistema.
+  const btnReportarPorFuiYoApp = document.getElementById('btnReportarPorFuiYoApp');
+  const campoReportarPorApp = document.getElementById('appReportarPor');
+  if (btnReportarPorFuiYoApp && campoReportarPorApp) {
+    btnReportarPorFuiYoApp.addEventListener('click', () => {
+      campoReportarPorApp.value = window.USUARIO_NOMBRE || '';
+      campoReportarPorApp.classList.remove('is-invalid');
+      campoReportarPorApp.removeAttribute('aria-invalid');
+      campoReportarPorApp.focus();
+    });
+  }
+
   // ---------------------------------------------------------------
   // Navegación entre secciones (con aviso si hay datos sin guardar
   // en el formulario de "Registrar instrumento")

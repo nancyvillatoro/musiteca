@@ -19,6 +19,7 @@ $tituloPagina = $tituloPagina ?? 'Musiteca';
   <link href="assets/css/style.css" rel="stylesheet">
   <script>
     window.ES_ADMIN = <?= json_encode(esAdministrador()) ?>;
+    window.USUARIO_NOMBRE = <?= json_encode($_SESSION['usuario_nombre'] ?? '') ?>;
   </script>
 </head>
 <body>

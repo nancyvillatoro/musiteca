@@ -493,8 +493,11 @@ require __DIR__ . '/includes/sidebar.php';
           </div>
           <div class="mb-3">
             <label class="form-label small fw-semibold" for="reportarPor">Reportado por *</label>
-            <input type="text" class="form-control" name="reportado_por" id="reportarPor" data-obligatorio="true" aria-required="true">
-            <div class="invalid-feedback">Indica quién reporta el problema.</div>
+            <div class="input-group">
+              <input type="text" class="form-control" name="reportado_por" id="reportarPor" data-obligatorio="true" aria-required="true">
+              <button type="button" class="btn btn-outline-secondary" id="btnReportarPorFuiYo" title="Usar mi nombre">Fui yo</button>
+              <div class="invalid-feedback">Indica quién reporta el problema.</div>
+            </div>
           </div>
           <div class="mb-3">
             <label class="form-label small fw-semibold" for="reportarMotivo">Motivo *</label>
