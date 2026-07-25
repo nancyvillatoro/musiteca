@@ -286,8 +286,9 @@ require __DIR__ . '/includes/sidebar.php';
               <div class="invalid-feedback">Ingresa el número de inventario.</div>
             </div>
             <div class="col-md-6">
-              <label class="form-label small fw-semibold" for="numInventarioAnterior">N° de inventario anterior</label>
-              <input type="text" class="form-control" name="num_inventario_anterior" id="numInventarioAnterior">
+              <label class="form-label small fw-semibold" for="numInventarioAnterior">N° de inventario anterior *</label>
+              <input type="text" class="form-control" name="num_inventario_anterior" id="numInventarioAnterior" data-obligatorio="true" aria-required="true">
+              <div class="invalid-feedback">Ingresa el número de inventario anterior.</div>
             </div>
             <div class="col-md-12">
               <label class="form-label small fw-semibold" for="nombreInstrumento">Nombre del instrumento *</label>
@@ -295,16 +296,19 @@ require __DIR__ . '/includes/sidebar.php';
               <div class="invalid-feedback">Ingresa el nombre del instrumento.</div>
             </div>
             <div class="col-md-6">
-              <label class="form-label small fw-semibold" for="marcaInstrumento">Marca</label>
-              <input type="text" class="form-control" name="marca" id="marcaInstrumento">
+              <label class="form-label small fw-semibold" for="marcaInstrumento">Marca *</label>
+              <input type="text" class="form-control" name="marca" id="marcaInstrumento" data-obligatorio="true" aria-required="true">
+              <div class="invalid-feedback">Ingresa la marca del instrumento.</div>
             </div>
             <div class="col-md-6">
-              <label class="form-label small fw-semibold" for="modeloInstrumento">Modelo</label>
-              <input type="text" class="form-control" name="modelo" id="modeloInstrumento">
+              <label class="form-label small fw-semibold" for="modeloInstrumento">Modelo *</label>
+              <input type="text" class="form-control" name="modelo" id="modeloInstrumento" data-obligatorio="true" aria-required="true">
+              <div class="invalid-feedback">Ingresa el modelo del instrumento.</div>
             </div>
             <div class="col-md-6">
-              <label class="form-label small fw-semibold" for="numSerie">N° de serie</label>
-              <input type="text" class="form-control" name="num_serie" id="numSerie">
+              <label class="form-label small fw-semibold" for="numSerie">N° de serie *</label>
+              <input type="text" class="form-control" name="num_serie" id="numSerie" data-obligatorio="true" aria-required="true">
+              <div class="invalid-feedback">Ingresa el número de serie.</div>
             </div>
             <div class="col-md-6">
               <label class="form-label small fw-semibold" for="ubicacionId">Ubicación física *</label>

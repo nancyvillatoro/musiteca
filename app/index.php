@@ -124,8 +124,9 @@ $ubicaciones = $pdo->query('SELECT id, nombre FROM ubicaciones ORDER BY nombre')
           <div class="invalid-feedback">Ingresa el código de inventario.</div>
         </div>
         <div class="mb-2">
-          <label class="form-label small fw-semibold" for="appNumInventarioAnterior">Código anterior (num_inv_anterior)</label>
-          <input type="text" class="form-control" id="appNumInventarioAnterior" name="num_inventario_anterior" placeholder="Opcional">
+          <label class="form-label small fw-semibold" for="appNumInventarioAnterior">Código anterior (num_inv_anterior) *</label>
+          <input type="text" class="form-control" id="appNumInventarioAnterior" name="num_inventario_anterior" data-obligatorio="true" aria-required="true">
+          <div class="invalid-feedback">Ingresa el código de inventario anterior.</div>
         </div>
         <div class="mb-2">
           <label class="form-label small fw-semibold" for="appNombreInstrumento">Nombre del instrumento *</label>
@@ -134,17 +135,20 @@ $ubicaciones = $pdo->query('SELECT id, nombre FROM ubicaciones ORDER BY nombre')
         </div>
         <div class="row g-2 mb-2">
           <div class="col-6">
-            <label class="form-label small fw-semibold" for="appMarca">Marca</label>
-            <input type="text" class="form-control" id="appMarca" name="marca" placeholder="Ej. Yamaha">
+            <label class="form-label small fw-semibold" for="appMarca">Marca *</label>
+            <input type="text" class="form-control" id="appMarca" name="marca" placeholder="Ej. Yamaha" data-obligatorio="true" aria-required="true">
+            <div class="invalid-feedback">Ingresa la marca.</div>
           </div>
           <div class="col-6">
-            <label class="form-label small fw-semibold" for="appModelo">Modelo</label>
-            <input type="text" class="form-control" id="appModelo" name="modelo" placeholder="Ej. FG800">
+            <label class="form-label small fw-semibold" for="appModelo">Modelo *</label>
+            <input type="text" class="form-control" id="appModelo" name="modelo" placeholder="Ej. FG800" data-obligatorio="true" aria-required="true">
+            <div class="invalid-feedback">Ingresa el modelo.</div>
           </div>
         </div>
         <div class="mb-2">
-          <label class="form-label small fw-semibold" for="appNumSerie">Número de serie</label>
-          <input type="text" class="form-control" id="appNumSerie" name="num_serie">
+          <label class="form-label small fw-semibold" for="appNumSerie">Número de serie *</label>
+          <input type="text" class="form-control" id="appNumSerie" name="num_serie" data-obligatorio="true" aria-required="true">
+          <div class="invalid-feedback">Ingresa el número de serie.</div>
         </div>
         <div class="mb-2">
           <label class="form-label small fw-semibold" for="appUbicacionId">Ubicación *</label>

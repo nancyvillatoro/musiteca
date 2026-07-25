@@ -166,9 +166,25 @@ switch ($accion) {
         $condicion              = $_POST['condicion'] ?? 'bueno';
         $estado                 = $_POST['estado'] ?? 'disponible';
 
-        if ($numInventario === '' || $nombre === '' || !$ubicacionId) {
+        // El manual de referencia (sección 3.7) exige capturar los 8 campos
+        // del expediente del instrumento como obligatorios (num_inventario,
+        // num_inventario_anterior, nombre, marca, modelo, num_serie,
+        // ubicacion_id y condicion); antes solo se exigían 3. Se valida aquí
+        // en el servidor porque data-obligatorio en el formulario (index.php
+        // / app/index.php) es una ayuda de UX, no una garantía: cualquier
+        // petición directa al endpoint debe respetar la misma regla.
+        $camposFaltantes = [];
+        if ($numInventario === '') $camposFaltantes[] = 'número de inventario';
+        if ($numInventarioAnterior === '') $camposFaltantes[] = 'número de inventario anterior';
+        if ($nombre === '') $camposFaltantes[] = 'nombre';
+        if ($marca === '') $camposFaltantes[] = 'marca';
+        if ($modelo === '') $camposFaltantes[] = 'modelo';
+        if ($numSerie === '') $camposFaltantes[] = 'número de serie';
+        if (!$ubicacionId) $camposFaltantes[] = 'ubicación';
+
+        if (!empty($camposFaltantes)) {
             http_response_code(422);
-            echo json_encode(['ok' => false, 'error' => 'Número de inventario, nombre y ubicación son obligatorios.']);
+            echo json_encode(['ok' => false, 'error' => 'Completa los siguientes campos obligatorios: ' . implode(', ', $camposFaltantes) . '.']);
             break;
         }
 

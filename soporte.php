@@ -46,8 +46,9 @@ require __DIR__ . '/includes/sidebar.php';
                 <div class="invalid-feedback">Describe brevemente la falla detectada.</div>
               </div>
               <div class="mb-3">
-                <label class="form-label small fw-semibold" for="inputCaptura">Captura de pantalla del error</label>
-                <input type="file" class="form-control" name="captura" id="inputCaptura" accept="image/png,image/jpeg,image/gif,image/webp">
+                <label class="form-label small fw-semibold" for="inputCaptura">Captura de pantalla del error *</label>
+                <input type="file" class="form-control" name="captura" id="inputCaptura" accept="image/png,image/jpeg,image/gif,image/webp" data-obligatorio="true" aria-required="true">
+                <div class="invalid-feedback">Adjunta una captura de pantalla del error.</div>
                 <div class="form-text">Formatos: JPG, PNG, GIF o WEBP · Máximo 5 MB.</div>
                 <img id="previsualizacionCaptura" class="img-fluid rounded mt-2 d-none border" alt="Vista previa de la captura de pantalla adjunta" style="max-height:160px;">
               </div>
