@@ -148,10 +148,19 @@ El proyecto está organizado en módulos independientes para facilitar su manten
 
 El proyecto está diseñado para seguir evolucionando. Entre las mejoras previstas se encuentran:
 
-* Notificaciones automáticas (correo) cuando un préstamo se vence.
-* Historial y restauración de instrumentos dados de baja desde la interfaz.
+* Avisos automáticos por correo cuando un préstamo se vence: el código base
+  ya existe (`includes/correo_smtp.php`, `includes/servicios/notificaciones_servicio.php`,
+  `scripts/enviar_avisos_vencidos.php`), pero se deja sin activar en esta
+  entrega porque requiere que alguien administre credenciales SMTP y una
+  tarea programada (cron) fuera del alcance del proyecto. Queda listo para
+  que, si en el futuro cuentan con correo institucional y una persona que
+  dé mantenimiento al servidor, se active sin tocar el resto del sistema.
+  Mientras tanto, los préstamos vencidos ya son visibles de inmediato desde
+  el Dashboard y el filtro "Vencidos" del módulo de Control.
 * Optimización adicional de la experiencia de usuario y accesibilidad.
 * Nuevas funcionalidades administrativas.
+* Documentación formal de la API interna.
+* Recuperación de contraseña autoservicio.
 
 ---
 
