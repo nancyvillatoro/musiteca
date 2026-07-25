@@ -260,20 +260,16 @@ a:focus-visible {
 }
 
 /* ---------- Franja de estado de inventario (mini-stats): información de
-   referencia (patrimonio total, asignados, mantenimiento). Vive en un
-   único bloque de menor peso visual que el KPI principal — sin sombra ni
-   tarjetas independientes — para no competir con él ni con los avisos
-   operativos. "Actualmente asignados" y "En mantenimiento" sí llevan a
-   Movimientos filtrado por ese estado (mismo patrón que "Ver préstamos
-   vencidos" en el aviso operativo); "Patrimonio total" es solo lectura,
-   por eso es el único que se queda como <div>. ---------- */
+   referencia (patrimonio total, asignados, mantenimiento). Menor peso
+   visual que el KPI principal (sin borde de color, sin la sombra elevada
+   del hero) para no competirle ni a él ni a los avisos operativos, pero
+   cada dato es su propia tarjeta con separación entre ellas — antes era
+   un único panel dividido por líneas internas, y se leía como una franja
+   plana en vez de tres piezas de información distintas. ---------- */
 .kpi-mini-row {
   display: flex;
+  gap: 0.75rem;
   height: 100%;
-  border: 1px solid var(--musiteca-borde);
-  border-radius: 14px;
-  background-color: var(--musiteca-gris-fondo);
-  overflow: hidden;
 }
 
 .kpi-mini {
@@ -284,23 +280,19 @@ a:focus-visible {
   flex-direction: row;
   align-items: center;
   gap: 0.65rem;
-  border-right: 1px solid var(--musiteca-borde);
+  border: 1px solid var(--musiteca-borde);
+  border-radius: 14px;
+  background-color: var(--musiteca-gris-tarjeta);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   /* Reset de estilos por defecto de <button>: dos de las tres tarjetas son
      botones (llevan a Movimientos filtrado), pero deben verse idénticas a
      la tarjeta de solo lectura. */
-  background-color: transparent;
-  border-top: none;
-  border-left: none;
-  border-bottom: none;
   text-align: left;
   font: inherit;
   color: inherit;
   cursor: default;
   width: auto;
-}
-
-.kpi-mini:last-child {
-  border-right: none;
 }
 
 button.kpi-mini-clicable {
@@ -309,7 +301,9 @@ button.kpi-mini-clicable {
 }
 
 button.kpi-mini-clicable:hover {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: var(--musiteca-gris-fondo);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
 }
 
 button.kpi-mini-clicable:focus-visible {
@@ -366,10 +360,9 @@ button.kpi-mini-clicable:focus-visible {
 }
 
 /* ---------- Avisos operativos: solo visibles cuando hay algo que atender
-   (vencidos / incidencias / soporte). Comparten estructura; cada uno
-   toma el color de acento correspondiente al tipo de alerta. ---------- */
+   (vencidos / soporte). Comparten estructura; cada uno toma el color de
+   acento correspondiente al tipo de alerta. ---------- */
 .alert-vencidos,
-.alert-incidencias,
 .alert-soporte {
   display: flex;
   border-radius: 0.85rem;
@@ -382,12 +375,6 @@ button.kpi-mini-clicable:focus-visible {
   border: 1px solid rgba(239, 68, 68, 0.25);
   background-color: var(--musiteca-rojo-alfa);
   color: #B91C1C;
-}
-
-.alert-incidencias {
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  background-color: var(--musiteca-ambar-alfa);
-  color: #92400E;
 }
 
 .alert-soporte {
@@ -404,32 +391,6 @@ button.kpi-mini-clicable:focus-visible {
 .alert-soporte .btn-outline-secondary {
   padding: 0.4rem 0.9rem;
   font-size: 0.82rem;
-}
-
-/* Lista desplegable de incidencias dentro del aviso: cada fila abre el
-   expediente del instrumento (mismo offcanvas que usa el Catálogo). */
-#listaIncidencias {
-  border-top: 1px solid rgba(245, 158, 11, 0.25);
-  padding-top: 0.5rem;
-}
-
-.incidencia-item {
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.4rem 0.5rem;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.incidencia-item:hover,
-.incidencia-item:focus-visible {
-  background-color: rgba(245, 158, 11, 0.16);
 }
 
 /* ---------- Barra de filtros (toolbar) ---------- */

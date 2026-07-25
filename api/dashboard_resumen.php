@@ -22,8 +22,16 @@
  * resto de la API.
  *
  * Acciones soportadas:
- *   resumen (GET) -> préstamos vencidos, incidencias abiertas/en atención
- *                    y reportes de soporte pendientes/en atención.
+ *   resumen (GET) -> préstamos vencidos y reportes de soporte
+ *                    pendientes/en atención.
+ *
+ * Ya no expone el conteo de incidencias abiertas/en atención: el aviso de
+ * incidencias del dashboard se retiró (ver revisión de UX del panel
+ * principal) porque en la práctica casi siempre describía lo mismo que la
+ * tarjeta "En mantenimiento", y los pocos casos donde sí divergía
+ * (incidencia reportada durante un préstamo activo, o sin préstamo
+ * asociado) siguen visibles y accionables desde la ficha del instrumento
+ * en el Catálogo.
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -59,25 +67,6 @@ $prestamosVencidos = (int)$pdo->query("
       AND s.fecha_devolucion_esperada < CURDATE()
 ")->fetchColumn();
 
-// ---------- Incidencias abiertas o en atención (pendientes) ----------
-$incidenciasPendientes = (int)$pdo->query("
-    SELECT COUNT(*) FROM incidencias WHERE estado IN ('abierta', 'en_atencion')
-")->fetchColumn();
-
-// Detalle breve (máx. 5, más recientes primero) de esas incidencias, con el
-// instrumento al que pertenecen. Solo lectura: no agrega ni modifica reglas
-// de negocio, únicamente le da un destino concreto al aviso del dashboard,
-// que antes mostraba el conteo sin forma de llegar al detalle.
-$incidenciasDetalle = $pdo->query("
-    SELECT inc.id, inc.motivo, inc.creado_en,
-           i.id AS instrumento_id, i.num_inventario, i.nombre
-    FROM incidencias inc
-    JOIN instrumentos i ON i.id = inc.instrumento_id
-    WHERE inc.estado IN ('abierta', 'en_atencion')
-    ORDER BY inc.creado_en DESC
-    LIMIT 5
-")->fetchAll();
-
 // ---------- Reportes de soporte técnico pendientes o en atención ----------
 $soportePendientes = (int)$pdo->query("
     SELECT COUNT(*) FROM reportes_soporte WHERE estado IN ('pendiente', 'en_atencion')
@@ -86,7 +75,5 @@ $soportePendientes = (int)$pdo->query("
 echo json_encode([
     'ok'                     => true,
     'prestamos_vencidos'     => $prestamosVencidos,
-    'incidencias_pendientes' => $incidenciasPendientes,
-    'incidencias_detalle'    => $incidenciasDetalle,
     'soporte_pendientes'     => $soportePendientes,
 ]);

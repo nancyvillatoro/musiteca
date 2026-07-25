@@ -93,14 +93,18 @@ require __DIR__ . '/includes/sidebar.php';
 
     <!-- Avisos operativos: fila de estado "requiere atención". Cada aviso
          está oculto por defecto y solo aparece cuando dashboard.js confirma
-         que su conteo es mayor que cero (vencidos / incidencias / soporte).
-         Va después de los KPI a propósito: los KPI orientan primero ("así
-         está el patrimonio hoy"), y solo entonces se muestra lo que
-         requiere seguimiento. Antes este bloque iba arriba de todo, pero
-         eso hacía que una incidencia reportada —parte normal del día a
-         día, no una falla del sistema— se sintiera como la noticia más
-         urgente de la pantalla, incluso antes de que el usuario supiera
-         cuántos instrumentos hay o cuántos están disponibles. -->
+         que su conteo es mayor que cero (vencidos / soporte). Va después de
+         los KPI a propósito: los KPI orientan primero ("así está el
+         patrimonio hoy"), y solo entonces se muestra lo que requiere
+         seguimiento.
+
+         Antes había un tercer aviso aquí (incidencias abiertas), retirado
+         porque en la práctica casi siempre describía lo mismo que la
+         tarjeta "En mantenimiento" del panel de KPI de arriba. Los pocos
+         casos donde divergía (incidencia reportada durante un préstamo
+         activo, o sin préstamo asociado) siguen siendo visibles y
+         accionables desde la ficha del instrumento en el Catálogo, solo
+         que sin un aviso propio en este panel. -->
     <div id="avisosOperativos" class="mb-4">
       <div class="alert alert-vencidos d-none align-items-center justify-content-between flex-wrap gap-2 mb-2" id="avisoVencidos" role="alert">
         <div class="d-flex align-items-center gap-2">
@@ -110,18 +114,6 @@ require __DIR__ . '/includes/sidebar.php';
         <button type="button" class="btn btn-sm btn-outline-danger" id="btnVerVencidos">
           Ver préstamos vencidos <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </button>
-      </div>
-      <div class="alert alert-incidencias d-none flex-column gap-2 mb-2" id="avisoIncidencias" role="alert">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-          <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-exclamation-triangle fs-5" aria-hidden="true"></i>
-            <span id="avisoIncidenciasTexto"></span>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary" id="btnToggleIncidencias" aria-expanded="false" aria-controls="listaIncidencias">
-            Ver detalle <i class="bi bi-chevron-down" aria-hidden="true"></i>
-          </button>
-        </div>
-        <ul class="list-unstyled small mb-0 d-none" id="listaIncidencias"></ul>
       </div>
       <div class="alert alert-soporte d-none align-items-center justify-content-between flex-wrap gap-2 mb-0" id="avisoSoporte" role="alert">
         <div class="d-flex align-items-center gap-2">
