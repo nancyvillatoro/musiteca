@@ -2,12 +2,15 @@
 -- Musiteca | H. Ayuntamiento de Tlalnepantla de Baz
 -- Esquema de base de datos MySQL (versión consolidada de producción)
 --
--- Este archivo reemplaza a schema.sql + migracion_v2_nucleo.sql +
--- migracion_v3_usuarios.sql + migracion_reportes_soporte.sql: una
--- instalación NUEVA solo necesita ejecutar este archivo una vez.
--- Los scripts en database/migraciones_historicas/ se conservan
--- únicamente como referencia para bases de datos que ya estaban en
--- producción antes de esta versión consolidada.
+-- Este archivo reemplaza, de forma acumulada, a: migracion_v2_nucleo.sql,
+-- migracion_v3_usuarios.sql, migracion_reportes_soporte.sql,
+-- migracion_prestamos_multiples.sql y
+-- migracion_incidencias_prestamo_activo.sql. Una instalación NUEVA solo
+-- necesita ejecutar este archivo una vez.
+-- Los cinco scripts anteriores se conservan en
+-- database/migraciones_historicas/ únicamente como referencia para bases
+-- de datos que ya estaban en producción antes de esta versión consolidada
+-- (o antes de alguna de las funcionalidades que agregaron sobre ella).
 --
 -- IMPORTANTE: este script YA NO crea usuarios de prueba con
 -- contraseñas fijas. Después de ejecutarlo, crea el primer
