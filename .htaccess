@@ -1,0 +1,23 @@
+# Musiteca - configuración de endurecimiento para Apache (producción)
+
+# No listar el contenido de directorios sin index
+Options -Indexes -MultiViews
+Options +FollowSymLinks
+
+# Oculta la firma del servidor
+ServerSignature Off
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(self)"
+    # Descomenta la siguiente línea únicamente cuando el sitio ya sirva
+    # exclusivamente por HTTPS (evita bloquear el acceso durante pruebas locales):
+    # Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+</IfModule>
+
+# Bloquea el acceso directo a archivos de configuración, sql y de texto plano
+<FilesMatch "\.(sql|md|log|env|ini)$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,24 @@
+# Musiteca — archivos que no deben versionarse
+
+# Adjuntos subidos en tiempo de ejecución por el módulo de Soporte técnico:
+# son datos generados por los usuarios (capturas de pantalla), no código del
+# proyecto. Se conserva la carpeta vía .gitkeep y el .htaccess de
+# endurecimiento sí se versiona (es configuración, no un adjunto).
+uploads/soporte/*
+!uploads/soporte/.htaccess
+!uploads/soporte/.gitkeep
+
+# Variables de entorno locales, si algún día se define un archivo de este
+# tipo para las credenciales de MUSITECA_DB_* (ver config/database.php).
+.env
+.env.*
+!.env.example
+
+# Archivos de sistema operativo / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs locales
+*.log

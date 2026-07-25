@@ -1,0 +1,1359 @@
+/* ============================================================
+   Musiteca — Identidad Visual Rediseñada (Premium & Moderna)
+   Color Guinda Institucional elevado con detalles elegantes,
+   tipografía Outfit/Inter, sombras suaves y micro-interacciones.
+   ============================================================ */
+
+:root {
+  /* Paleta principal */
+  --musiteca-guinda:         #7A1E3C;
+  --musiteca-guinda-oscuro:  #4A0E23;
+  --musiteca-guinda-claro:   #9E2D50;
+  --musiteca-guinda-alfa:    rgba(122, 30, 60, 0.08);
+  --musiteca-guinda-alfa-focus: rgba(122, 30, 60, 0.2);
+  
+  /* Acentos de estado semánticos (con un tono vibrante y moderno) */
+  --musiteca-verde:          #10B981; /* disponible / correcto */
+  --musiteca-verde-alfa:     rgba(16, 185, 129, 0.12);
+  --musiteca-ambar:          #F59E0B;  /* pendiente / advertencia */
+  --musiteca-ambar-alfa:     rgba(245, 158, 11, 0.12);
+  --musiteca-rojo:           #EF4444;   /* en reparación / error */
+  --musiteca-rojo-alfa:      rgba(239, 68, 68, 0.12);
+  
+  /* Tonos neutros */
+  --musiteca-oro:            #C5A059;
+  --musiteca-oro-oscuro:     #96702F;
+  --musiteca-oro-claro:      #E4C384;
+  --musiteca-oro-alfa:       rgba(197, 160, 89, 0.14);
+  --musiteca-oro-alfa-focus: rgba(197, 160, 89, 0.35);
+  --musiteca-gris-fondo:     #F8FAFC;
+  --musiteca-gris-tarjeta:   #FFFFFF;
+  --musiteca-gris-texto:     #334155;
+  --musiteca-gris-muted:     #64748B;
+  --musiteca-borde:          #E2E8F0;
+  --musiteca-borde-hover:    #CBD5E1;
+
+  /* Sobrecarga Bootstrap */
+  --bs-primary: var(--musiteca-guinda);
+  --bs-primary-rgb: 122, 30, 60;
+  --bs-body-bg: var(--musiteca-gris-fondo);
+  --bs-body-color: var(--musiteca-gris-texto);
+}
+
+/* ---------- Estilos Base ---------- */
+body {
+  background-color: var(--musiteca-gris-fondo);
+  color: var(--musiteca-gris-texto);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.011em;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .fw-bold {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Transiciones suaves para elementos interactivos */
+a, button, .card, .form-control, .form-select, .nav-link {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Barra Lateral (Sidebar) ---------- */
+.sidebar {
+  min-height: 100vh;
+  background: linear-gradient(185deg, var(--musiteca-guinda-oscuro) 0%, #2A0512 100%);
+  color: #fff;
+  width: 260px;
+  position: sticky;
+  top: 0;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.15);
+  border-top: 3px solid var(--musiteca-oro);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-logo {
+  width: 1.85rem;
+  height: 1.85rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+}
+
+.sidebar .brand {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.5px;
+  padding: 1.5rem 1.25rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 0.5rem;
+  margin: 0.2rem 0.8rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgba(197, 160, 89, 0.1);
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.sidebar .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+}
+
+.sidebar .nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  height: 50%;
+  width: 4px;
+  background-color: var(--musiteca-oro);
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar .nav-link i {
+  width: 1.5rem;
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.sidebar .nav-link:hover i {
+  transform: scale(1.12);
+}
+
+/* ---------- Topbar ---------- */
+.topbar {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--musiteca-borde);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 4px 16px rgba(15, 23, 42, 0.03);
+}
+
+.topbar h5 {
+  color: var(--musiteca-guinda-oscuro);
+  letter-spacing: -0.02em;
+}
+
+/* Botón de menú (móvil) como icon-button consistente con el resto del sistema */
+#btnToggleSidebar {
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.65rem;
+}
+
+/* ---------- Enlace "saltar al contenido" (accesibilidad de teclado) ---------- */
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: 0.75rem;
+  z-index: 2000;
+  background: var(--musiteca-guinda-oscuro);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  color: #fff;
+  outline: 3px solid var(--musiteca-oro);
+  outline-offset: 2px;
+}
+
+/* ---------- Foco accesible unificado ---------- */
+.btn:focus-visible,
+.page-link:focus-visible,
+.nav-link:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--musiteca-guinda-alfa-focus);
+}
+
+/* ---------- KPI principal (hero): única tarjeta con mayor peso visual.
+   Responde la pregunta que el usuario necesita primero ("¿hay
+   instrumentos disponibles para prestar?"), por eso es más grande y con
+   más contraste que el resto de la información de inventario. ---------- */
+.kpi-hero {
+  border: 1px solid var(--musiteca-borde);
+  border-left: 5px solid var(--musiteca-verde);
+  border-radius: 14px;
+  background-color: var(--musiteca-gris-tarjeta);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
+  padding: 1.15rem 1.4rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.18);
+}
+
+.kpi-hero-icon {
+  width: 3.15rem;
+  height: 3.15rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  flex-shrink: 0;
+  background: var(--musiteca-verde-alfa);
+  color: var(--musiteca-verde);
+}
+
+.kpi-hero-texto {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-hero-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--musiteca-guinda-oscuro);
+  line-height: 1;
+}
+
+.kpi-hero-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--musiteca-gris-muted);
+  margin-top: 0.2rem;
+}
+
+/* ---------- Franja de estado de inventario (mini-stats): información de
+   referencia (patrimonio total, asignados, mantenimiento), útil pero no
+   accionable a diario. Vive en un único bloque de menor peso visual —
+   sin sombra ni tarjetas independientes — para no competir con el KPI
+   principal ni con los avisos operativos. ---------- */
+.kpi-mini-row {
+  display: flex;
+  height: 100%;
+  border: 1px solid var(--musiteca-borde);
+  border-radius: 14px;
+  background-color: var(--musiteca-gris-fondo);
+  overflow: hidden;
+}
+
+.kpi-mini {
+  flex: 1;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--musiteca-borde);
+}
+
+.kpi-mini:last-child {
+  border-right: none;
+}
+
+.kpi-mini-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--musiteca-gris-texto);
+  line-height: 1.1;
+}
+
+.kpi-mini-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--musiteca-gris-muted);
+  margin-top: 0.15rem;
+}
+
+/* ---------- Avisos operativos: solo visibles cuando hay algo que atender
+   (vencidos / incidencias / soporte). Comparten estructura; cada uno
+   toma el color de acento correspondiente al tipo de alerta. ---------- */
+.alert-vencidos,
+.alert-incidencias,
+.alert-soporte {
+  display: flex;
+  border-radius: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.alert-vencidos {
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  background-color: var(--musiteca-rojo-alfa);
+  color: #B91C1C;
+}
+
+.alert-incidencias {
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  background-color: var(--musiteca-ambar-alfa);
+  color: #92400E;
+}
+
+.alert-soporte {
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  background-color: var(--musiteca-oro-alfa);
+  color: var(--musiteca-oro-oscuro);
+}
+
+.alert-vencidos .btn-outline-danger {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+.alert-soporte .btn-outline-secondary {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+/* Lista desplegable de incidencias dentro del aviso: cada fila abre el
+   expediente del instrumento (mismo offcanvas que usa el Catálogo). */
+#listaIncidencias {
+  border-top: 1px solid rgba(245, 158, 11, 0.25);
+  padding-top: 0.5rem;
+}
+
+.incidencia-item {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.5rem;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.incidencia-item:hover,
+.incidencia-item:focus-visible {
+  background-color: rgba(245, 158, 11, 0.16);
+}
+
+/* ---------- Barra de filtros (toolbar) ---------- */
+.filtros-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #FAF9FB;
+  border: 1px solid var(--musiteca-borde);
+  border-radius: 0.85rem;
+  padding: 0.7rem 0.85rem;
+  transition: border-color 0.25s ease;
+}
+
+.filtros-toolbar:focus-within {
+  border-color: var(--musiteca-guinda-claro);
+}
+
+/* Buscador: más ancho para que el placeholder no se corte */
+.filtros-buscador {
+  flex: 2 1 340px;
+  min-width: 280px;
+}
+
+.filtros-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.85rem;
+}
+
+.filtros-controles .form-select {
+  min-width: 180px;
+}
+
+/* Grupo de fecha: etiqueta arriba del input, bien espaciado */
+.filtro-fecha-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.filtro-fecha-etiqueta {
+  font-size: 0.72rem;
+  color: var(--musiteca-gris-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.filtro-fecha-grupo .form-control {
+  min-width: 160px;
+}
+
+.filtros-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+@media (max-width: 767.98px) {
+  .filtros-toolbar {
+    align-items: stretch;
+  }
+
+  .filtros-buscador,
+  .filtros-controles,
+  .filtros-acciones {
+    flex: 1 1 100%;
+    margin-left: 0;
+  }
+
+  .filtros-controles {
+    align-items: stretch;
+  }
+
+  .filtros-controles .form-select,
+  .filtro-fecha-grupo {
+    flex: 1 1 auto;
+  }
+
+  .filtros-acciones .btn {
+    flex: 1 1 auto;
+  }
+}
+
+/* ---------- Paneles y Contenedores ---------- */
+.card-panel {
+  border: 1px solid var(--musiteca-borde);
+  border-radius: 1rem;
+  background-color: var(--musiteca-gris-tarjeta);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-panel:hover {
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.05);
+  border-color: var(--musiteca-borde-hover);
+}
+
+.card-header {
+  border-bottom: 1px solid var(--musiteca-borde);
+  background-color: transparent;
+  padding: 1rem 1.25rem;
+}
+
+/* Pestañas (Tabs) */
+.nav-tabs-musiteca {
+  border-bottom: 2px solid var(--musiteca-borde);
+  gap: 1.5rem;
+}
+
+.nav-tabs-musiteca .nav-link {
+  color: var(--musiteca-gris-muted);
+  border: none;
+  background: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.75rem 0.6rem;
+  border-radius: 0.6rem 0.6rem 0 0;
+  position: relative;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-tabs-musiteca .nav-link:hover {
+  color: var(--musiteca-oro-oscuro);
+  background-color: var(--musiteca-oro-alfa);
+}
+
+.nav-tabs-musiteca .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--musiteca-guinda);
+  border-radius: 3px;
+  transition: width 0.25s ease;
+}
+
+.nav-tabs-musiteca .nav-link.active {
+  color: var(--musiteca-guinda);
+}
+
+.nav-tabs-musiteca .nav-link.active:hover {
+  color: var(--musiteca-guinda);
+  background-color: transparent;
+}
+
+.nav-tabs-musiteca .nav-link.active::after {
+  width: 100%;
+}
+
+/* ---------- Tablas Modernas ---------- */
+.table-musiteca {
+  margin-bottom: 0;
+}
+
+.table-musiteca thead th {
+  background-color: #FAF9FB;
+  color: var(--musiteca-gris-muted);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.7rem 1rem;
+  border-bottom: 2px solid var(--musiteca-borde);
+  white-space: nowrap;
+}
+
+.table-musiteca tbody td {
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid var(--musiteca-borde);
+  color: var(--musiteca-gris-texto);
+  vertical-align: middle;
+}
+
+.table-musiteca tbody tr {
+  background-color: transparent;
+}
+
+.table-musiteca tbody tr:nth-child(even) {
+  background-color: rgba(248, 250, 252, 0.6);
+}
+
+.table-musiteca tbody tr:hover {
+  background-color: rgba(197, 160, 89, 0.06);
+}
+
+/* Columna de acciones: ancho mínimo garantizado para que los botones
+   (icono, o icono + texto en pantallas grandes) siempre quepan en una
+   sola línea, sin cortarse ni provocar scroll horizontal innecesario. */
+.table-musiteca .col-acciones {
+  min-width: 8.5rem;
+  white-space: nowrap;
+}
+
+/* Variante para tablas cuyos botones de acción incluyen texto (además
+   del icono) en pantallas grandes, como Movimientos y préstamos. */
+.table-musiteca .col-acciones-control {
+  min-width: 14rem;
+}
+
+/* Contenedor de los botones de acción de cada fila: alineado vertical
+   y horizontalmente, en una sola línea siempre que el espacio alcance. */
+.table-musiteca .acciones-grupo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 575.98px) {
+  .table-musiteca .acciones-grupo {
+    flex-wrap: wrap;
+  }
+}
+
+/* Botones de acción tipo icono (ver / editar / eliminar / activar):
+   icon-buttons cuadrados y compactos, coherentes con un panel empresarial. */
+.table-musiteca .btn-icono-tabla {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.55rem;
+  flex-shrink: 0;
+}
+
+/* Botones de acción con texto (solicitar / registrar regreso / etc.):
+   conservan el padding compacto de Bootstrap .btn-sm, pero alineados
+   con su icono y sin permitir que el texto se corte o se divida. */
+.table-musiteca .btn-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  border-radius: 0.55rem;
+  flex-shrink: 0;
+}
+
+.table-musiteca .btn-outline-secondary:hover {
+  color: var(--musiteca-guinda);
+}
+
+/* Badges de Estado y Condición */
+.badge-estado {
+  font-weight: 600;
+  font-size: 0.72rem;
+  padding: 0.45em 0.85em;
+  border-radius: 50rem;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.badge-estado::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.badge-disponible    { background: var(--musiteca-verde-alfa); color: var(--musiteca-verde); }
+.badge-en_uso        { background: var(--musiteca-ambar-alfa); color: #B45309; }
+.badge-en_reparacion { background: var(--musiteca-rojo-alfa); color: var(--musiteca-rojo); }
+
+.badge-bueno         { background: var(--musiteca-verde-alfa); color: var(--musiteca-verde); }
+.badge-regular       { background: var(--musiteca-ambar-alfa); color: #B45309; }
+.badge-malo          { background: var(--musiteca-rojo-alfa); color: var(--musiteca-rojo); }
+.badge-inservible    { background: #F1F5F9; color: #475569; }
+.badge-baja          { background: var(--musiteca-oro-alfa); color: var(--musiteca-oro-oscuro); }
+
+/* Condición de devolución (registrada al cerrar un préstamo) */
+.badge-excelente     { background: var(--musiteca-verde-alfa); color: var(--musiteca-verde); }
+.badge-desgaste      { background: var(--musiteca-ambar-alfa); color: #B45309; }
+.badge-danado        { background: var(--musiteca-rojo-alfa); color: var(--musiteca-rojo); }
+.badge-incompleto    { background: var(--musiteca-rojo-alfa); color: var(--musiteca-rojo); }
+
+/* Indicador de incidencia reportada sobre un instrumento con préstamo activo */
+.badge-incidencia    { background: var(--musiteca-ambar-alfa); color: #B45309; margin-left: 0.35rem; }
+
+/* Botones Premium */
+
+/* Acción principal: fondo guinda + texto blanco en negrita, con sombra suave.
+   (Antes una regla posterior pisaba el color a rojo por error de cascada CSS;
+   ese era el causante real del bajo contraste. Ya corregido.) */
+.btn-primary-musiteca {
+  background-color: var(--musiteca-guinda);
+  border-color: var(--musiteca-guinda);
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  border-radius: 0.65rem;
+  padding: 0.6rem 1.15rem;
+  box-shadow: 0 4px 10px rgba(122, 30, 60, 0.25);
+}
+
+.btn-primary-musiteca:hover,
+.btn-primary-musiteca:focus,
+.btn-primary-musiteca:active {
+  background-color: var(--musiteca-guinda-oscuro);
+  border-color: var(--musiteca-guinda-oscuro);
+  color: #FFFFFF;
+  box-shadow: 0 6px 14px rgba(122, 30, 60, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-primary-musiteca:active {
+  transform: translateY(0);
+}
+
+/* Acción secundaria ("Descargar reporte"): outline guinda sobre fondo blanco.
+   Se elimina el dorado/mostaza; el nombre de la clase se conserva para no
+   tener que tocar el resto del código, pero el estilo ahora es "outline". */
+.btn-oro-musiteca {
+  background-color: #FFFFFF;
+  border: 1px solid var(--musiteca-guinda);
+  color: var(--musiteca-guinda);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  border-radius: 0.65rem;
+  padding: 0.6rem 1.15rem;
+  box-shadow: none;
+}
+
+.btn-oro-musiteca:hover,
+.btn-oro-musiteca:focus {
+  background-color: var(--musiteca-guinda-alfa);
+  border-color: var(--musiteca-guinda);
+  color: var(--musiteca-guinda-oscuro);
+  transform: translateY(-1px);
+}
+
+.btn-oro-musiteca:active {
+  background-color: var(--musiteca-guinda-alfa);
+  transform: translateY(0);
+}
+
+/* Acción neutra ("Limpiar filtro"): sin color de marca, para no competir
+   visualmente con las acciones principal/secundaria. */
+.btn-outline-secondary {
+  background-color: transparent;
+  border-color: var(--musiteca-borde);
+  color: var(--musiteca-gris-muted);
+  border-radius: 0.65rem;
+  padding: 0.6rem 1.15rem;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #F1F5F9;
+  border-color: var(--musiteca-borde-hover);
+  color: var(--musiteca-guinda);
+}
+
+.btn-outline-danger {
+  border-color: rgba(239, 68, 68, 0.35);
+  color: var(--musiteca-rojo);
+  border-radius: 0.65rem;
+  padding: 0.6rem 1.15rem;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--musiteca-rojo-alfa);
+  border-color: var(--musiteca-rojo);
+  color: var(--musiteca-rojo);
+  transform: translateY(-1px);
+}
+
+/* Acciones semánticas sólidas (confirmar / advertir / reportar), alineadas
+   con los mismos tonos verde/ámbar/rojo usados en badges y KPIs, en vez de
+   los colores por defecto de Bootstrap. El guinda sigue siendo el único
+   color "de marca"; estos son estrictamente de estado. */
+.btn-success {
+  background-color: var(--musiteca-verde);
+  border-color: var(--musiteca-verde);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 0.65rem;
+  padding: 0.6rem 1.15rem;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+  background-color: #0E9E70;
+  border-color: #0E9E70;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.btn-warning {
+  background-color: var(--musiteca-ambar);
+  border-color: var(--musiteca-ambar);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 0.65rem;
+  padding: 0.6rem 1.15rem;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+  background-color: #D97706;
+  border-color: #D97706;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: var(--musiteca-rojo);
+  border-color: var(--musiteca-rojo);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 0.65rem;
+  padding: 0.6rem 1.15rem;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+  background-color: #DC2626;
+  border-color: #DC2626;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* ---------- Formularios Modernos ---------- */
+.form-control,
+.form-select {
+  border: 1px solid var(--musiteca-borde);
+  border-radius: 0.65rem;
+  padding: 0.6rem 0.9rem;
+  color: var(--musiteca-gris-texto);
+  font-size: 0.92rem;
+  background-color: #FFFFFF;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: var(--musiteca-borde-hover);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--musiteca-guinda-claro);
+  box-shadow: 0 0 0 4px var(--musiteca-guinda-alfa-focus);
+  outline: none;
+}
+
+.form-label {
+  color: var(--musiteca-gris-texto);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+/* Inputs de búsqueda */
+.input-group-text {
+  background-color: #FFFFFF;
+  border: 1px solid var(--musiteca-borde);
+  border-radius: 0.65rem;
+  color: var(--musiteca-gris-muted);
+}
+
+.input-group > .form-control:focus + .input-group-text,
+.input-group > .form-control:focus ~ .input-group-text {
+  border-color: var(--musiteca-guinda-claro);
+}
+
+/* ---------- Modales y Paneles Deslizantes (Offcanvas) ---------- */
+.modal-content {
+  border: none;
+  border-top: 3px solid var(--musiteca-oro);
+  border-radius: 1.1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--musiteca-borde);
+  padding: 1.15rem 1.25rem;
+  background-color: #FAF9FB;
+}
+
+.modal-title {
+  color: var(--musiteca-guinda-oscuro);
+  font-size: 1.15rem;
+}
+
+.modal-body {
+  padding: 1.25rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--musiteca-borde);
+  padding: 1rem 1.25rem;
+  background-color: #FAF9FB;
+}
+
+/* Refuerzo del modal "scrollable": el modal-content debe quedar limitado
+   a la altura de la pantalla y solo el cuerpo del formulario debe hacer
+   scroll, para que el pie (con el botón de Guardar) siempre sea visible
+   sin importar cuántos campos tenga el formulario ni la altura de la
+   pantalla del usuario. Se limita a pantallas >= 576px porque por debajo
+   de ese ancho el modal usa modal-fullscreen-sm-down (pantalla completa
+   de Bootstrap), que ya maneja su propia altura correctamente. */
+@media (min-width: 576px) {
+  .modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 3.5rem);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* El formulario (<form>) que envuelve header/body/footer es un elemento
+     de bloque por defecto: al insertarse como único hijo de .modal-content
+     (que es flex-column), no participaba del layout flex y crecía a su
+     alto de contenido completo. Como .modal-content tenía overflow:hidden,
+     el pie con el botón "Guardar instrumento" quedaba recortado y solo se
+     veía si se reducía el zoom del navegador. Convertir el <form> en un
+     contenedor flex-column que ocupa el espacio disponible (flex:1 1 auto
+     + min-height:0) permite que .modal-body (con overflow-y:auto) sea el
+     único que haga scroll, dejando siempre visible el .modal-footer. */
+  .modal-dialog-scrollable .modal-content > form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .modal-dialog-scrollable .modal-body {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .modal-dialog-scrollable .modal-header,
+  .modal-dialog-scrollable .modal-footer {
+    flex: 0 0 auto;
+  }
+}
+
+.offcanvas {
+  background-color: var(--musiteca-gris-tarjeta);
+  border-left: 1px solid var(--musiteca-borde);
+  border-top: 3px solid var(--musiteca-oro);
+}
+
+.offcanvas-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+  background-color: var(--musiteca-borde-hover);
+  border-radius: 999px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--musiteca-guinda-claro);
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid var(--musiteca-borde);
+  background-color: #FAF9FB;
+  padding: 1.15rem 1.25rem;
+}
+
+.offcanvas-title {
+  color: var(--musiteca-guinda-oscuro);
+}
+
+/* ---------- Rediseño Total de Login (Dividido y Premium) ---------- */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+}
+
+.login-panel-brand {
+  flex: 1 1 50%;
+  background: linear-gradient(155deg, var(--musiteca-guinda-oscuro) 0%, #1E030C 100%);
+  color: #fff;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-panel-brand::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--musiteca-guinda-claro) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  opacity: 0.3;
+  filter: blur(40px);
+}
+
+.login-panel-brand::before {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, var(--musiteca-oro) 0%, transparent 70%);
+  bottom: -90px;
+  left: -90px;
+  opacity: 0.18;
+  filter: blur(40px);
+}
+
+.login-panel-brand .nota-decorativa {
+  position: absolute;
+  color: var(--musiteca-oro);
+  opacity: 0.05;
+  pointer-events: none;
+  font-size: 12rem;
+  line-height: 1;
+}
+
+.login-panel-brand .nota-1 { top: 10%; right: 10%; transform: rotate(15deg); }
+.login-panel-brand .nota-2 { bottom: 10%; left: 10%; transform: rotate(-15deg); font-size: 8rem; }
+
+.login-brand-badge {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--musiteca-oro);
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-brand-badge .brand-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.login-mobile-badge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.login-mobile-badge .brand-logo {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.login-panel-brand h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.login-panel-brand p.tagline {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+}
+
+.login-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.login-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.login-feature-list li i {
+  color: var(--musiteca-oro);
+  font-size: 1.2rem;
+}
+
+.login-panel-form {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background-color: var(--musiteca-gris-fondo);
+}
+
+.login-form-inner {
+  width: 100%;
+  max-width: 400px;
+  background: #FFFFFF;
+  padding: 2.25rem;
+  border-radius: 1.1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--musiteca-borde);
+}
+
+/* Ojo password */
+.btn-toggle-password {
+  border: 1px solid var(--musiteca-borde);
+  border-left: none;
+  background: #fff;
+  border-top-right-radius: 0.65rem;
+  border-bottom-right-radius: 0.65rem;
+  padding: 0.6rem 0.9rem;
+  color: var(--musiteca-gris-muted);
+}
+
+.btn-toggle-password:hover {
+  color: var(--musiteca-guinda);
+}
+
+/* ---------- Estados de Carga y Vacíos ---------- */
+.estado-lista {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  color: var(--musiteca-gris-muted);
+  text-align: center;
+}
+
+.estado-lista i {
+  font-size: 2.5rem;
+  color: var(--musiteca-borde-hover);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.estado-lista .spinner-border {
+  color: var(--musiteca-guinda);
+}
+
+.estado-lista.estado-error {
+  color: var(--musiteca-rojo);
+}
+
+.estado-lista.estado-error i {
+  color: var(--musiteca-rojo);
+  animation: shakeIcon 0.5s ease-in-out;
+}
+
+@keyframes shakeIcon {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* ---------- Confirmaciones Globales ---------- */
+.confirm-modal-content {
+  border: none;
+  border-radius: 1.1rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-modal-icono {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 2rem;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.confirm-icono-danger  { background: var(--musiteca-rojo-alfa);  color: var(--musiteca-rojo); }
+.confirm-icono-warning { background: var(--musiteca-ambar-alfa); color: var(--musiteca-ambar); }
+.confirm-icono-info    { background: var(--musiteca-guinda-alfa);  color: var(--musiteca-guinda); }
+.confirm-icono-success { background: var(--musiteca-verde-alfa);  color: var(--musiteca-verde); }
+
+/* ---------- Paginación ---------- */
+.pagination {
+  gap: 0.25rem;
+}
+
+.page-link {
+  border: 1px solid var(--musiteca-borde);
+  color: var(--musiteca-gris-texto);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  padding: 0.5rem 0.85rem;
+}
+
+.page-link:hover {
+  background-color: var(--musiteca-oro-alfa);
+  border-color: var(--musiteca-oro);
+  color: var(--musiteca-oro-oscuro);
+}
+
+.page-item.active .page-link {
+  background-color: var(--musiteca-guinda);
+  border-color: var(--musiteca-guinda);
+  color: #fff;
+}
+
+/* ---------- Toast Personalizado ---------- */
+.toast {
+  border-radius: 0.85rem;
+  background-color: #fff;
+  border-left: 5px solid var(--musiteca-guinda);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+}
+
+.toast .text-success { color: var(--musiteca-verde) !important; }
+.toast .text-danger   { color: var(--musiteca-rojo) !important; }
+.toast .text-warning  { color: var(--musiteca-ambar) !important; }
+
+/* ---------- App Móvil (Adaptación y PWA Feel) ---------- */
+.app-shell {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(135deg, var(--musiteca-guinda-oscuro) 0%, #300614 100%);
+  color: #fff;
+  padding: 1.5rem 1.25rem;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  border-bottom: 3px solid var(--musiteca-oro);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.app-header .fw-bold {
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+}
+
+#appNav {
+  background-color: #F8FAFC;
+  border-radius: 1rem;
+  margin: 0.75rem;
+  padding: 0.35rem;
+  border: 1px solid var(--musiteca-borde);
+}
+
+#appNav .nav-link {
+  color: var(--musiteca-gris-muted);
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.5rem;
+  font-weight: 600;
+  border: none;
+}
+
+#appNav .nav-link.active {
+  background-color: #FFFFFF;
+  color: var(--musiteca-guinda);
+  box-shadow: 0 4px 12px rgba(122, 30, 60, 0.06);
+}
+
+.app-panel {
+  padding: 0.25rem;
+}
+
+.app-scan-frame {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 1.25rem;
+  aspect-ratio: 4/3;
+  background: #0F172A;
+  box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Botón flotante alternativo */
+.btn-mobile-touch {
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 991.98px) {
+  .sidebar {
+    position: fixed;
+    left: -270px;
+    z-index: 1040;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100vh;
+  }
+  .sidebar.show {
+    left: 0;
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1035;
+  }
+  .sidebar-overlay.show {
+    display: block;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .login-page {
+    flex-direction: column;
+  }
+  .login-panel-brand {
+    display: none;
+  }
+  .login-panel-form {
+    flex: 1 1 100%;
+    padding: 1.5rem;
+    min-height: 100vh;
+  }
+  .login-form-inner {
+    padding: 2rem 1.5rem;
+  }
+  .topbar {
+    padding: 0.75rem 1rem !important;
+  }
+  .kpi-hero-value {
+    font-size: 1.9rem;
+  }
+  .kpi-hero-label {
+    font-size: 0.78rem;
+  }
+  .kpi-mini-value {
+    font-size: 1.05rem;
+  }
+  .kpi-mini-label {
+    font-size: 0.65rem;
+  }
+  .kpi-mini {
+    padding: 0.7rem 0.6rem;
+  }
+  .modal-footer {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+  .modal-footer .btn {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+/* Efectos de oscilación para inputs con error */
+.campo-shake {
+  animation: shakeCampo 0.35s ease-in-out;
+}
+
+@keyframes shakeCampo {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Musiteca">
+  <defs>
+    <linearGradient id="musitecaFondo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9E2D50"/>
+      <stop offset="100%" stop-color="#4A0E23"/>
+    </linearGradient>
+    <linearGradient id="musitecaOro" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E4C384"/>
+      <stop offset="100%" stop-color="#B4863F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Insignia -->
+  <rect x="1.5" y="1.5" width="61" height="61" rx="17" fill="url(#musitecaFondo)"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="17" fill="none" stroke="url(#musitecaOro)" stroke-width="1.4" opacity="0.65"/>
+
+  <!-- Marca: nota musical cuya cabeza es una etiqueta de catálogo -->
+  <g>
+    <!-- Plica -->
+    <rect x="30.4" y="13" width="3.2" height="29" rx="1.6" fill="url(#musitecaOro)"/>
+    <!-- Corchete -->
+    <path d="M33.6 13.5c7.4 1.7 10.6 8 8.6 13.4-1.2-4.7-4.4-8-8.6-9.4z" fill="url(#musitecaOro)"/>
+    <!-- Cabeza de nota como etiqueta de inventario -->
+    <g transform="translate(21 38) rotate(-16)">
+      <path d="M2 0h11a2 2 0 0 1 1.6.8l3.4 4.6a2 2 0 0 1 0 2.4l-3.4 4.6A2 2 0 0 1 13 13H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="url(#musitecaOro)"/>
+      <circle cx="4.4" cy="6.3" r="1.5" fill="#4A0E23"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,3 @@
+# Esta carpeta contiene credenciales y configuración: nunca debe
+# resolverse directamente por HTTP, solo vía require/include desde PHP.
+Require all denied

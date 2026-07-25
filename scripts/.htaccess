@@ -1,0 +1,2 @@
+# Scripts de línea de comandos únicamente. Nunca deben ejecutarse por HTTP.
+Require all denied

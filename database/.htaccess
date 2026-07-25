@@ -1,0 +1,2 @@
+# Scripts SQL y de migración: no deben ser accesibles vía HTTP.
+Require all denied
