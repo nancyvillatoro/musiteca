@@ -1,6 +1,7 @@
 <?php
 /**
- * Sidebar de navegación. Requiere $seccionActiva ('inventario'|'control').
+ * Sidebar de navegación. Requiere $seccionActiva
+ * ('inventario'|'control'|'soporte'|'usuarios'|'instrumentos_baja').
  *
  * 'inventario' y 'control' comparten una sola entrada de menú ("Panel
  * principal"): ambas son pestañas de la misma página (index.php), así que
@@ -41,6 +42,9 @@ $seccionActiva = $seccionActiva ?? 'inventario';
     </div>
     <a href="usuarios.php" class="nav-link d-flex align-items-center <?= $seccionActiva === 'usuarios' ? 'active' : '' ?>">
       <i class="bi bi-people"></i> Gestión de usuarios
+    </a>
+    <a href="instrumentos_baja.php" class="nav-link d-flex align-items-center <?= $seccionActiva === 'instrumentos_baja' ? 'active' : '' ?>">
+      <i class="bi bi-arrow-counterclockwise"></i> Instrumentos dados de baja
     </a>
     <?php endif; ?>
   </div>

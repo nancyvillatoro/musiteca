@@ -2,10 +2,12 @@
 /**
  * Endpoint AJAX para el módulo de Inventario.
  * Acciones soportadas (parámetro "accion"):
- *   listar   (GET)  -> listado paginado con búsqueda y filtro de condición
- *   detalle  (GET)  -> expediente completo de un instrumento + bitácora
- *   guardar  (POST) -> crea o actualiza un instrumento
- *   eliminar (POST) -> da de baja un instrumento
+ *   listar      (GET)  -> listado paginado con búsqueda y filtro de condición
+ *   detalle     (GET)  -> expediente completo de un instrumento + bitácora
+ *   guardar     (POST) -> crea o actualiza un instrumento
+ *   eliminar    (POST) -> da de baja un instrumento
+ *   listar_baja (GET)  -> listado paginado de instrumentos dados de baja (admin)
+ *   restaurar   (POST) -> restaura un instrumento dado de baja al catálogo (admin)
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -296,6 +298,98 @@ switch ($accion) {
         ");
         $stmt->execute([$motivoBaja ?: null, $id]);
         echo json_encode(['ok' => true, 'mensaje' => 'Instrumento dado de baja del catálogo.']);
+        break;
+
+    case 'listar_baja':
+        // Listado de instrumentos dados de baja (activo = 0), para su
+        // consulta y eventual restauración. Restringido a administrador:
+        // solo el rol que puede dar de baja (acción 'eliminar') puede ver
+        // y revertir ese historial.
+        requerirAdministrador();
+        $buscar    = trim($_GET['buscar'] ?? '');
+        $pagina    = max(1, (int)($_GET['pagina'] ?? 1));
+        $porPagina = PAGINACION_POR_PAGINA;
+        $offset    = ($pagina - 1) * $porPagina;
+
+        $condiciones = ['i.activo = 0'];
+        $params      = [];
+
+        if ($buscar !== '') {
+            $condiciones[] = '(i.num_inventario LIKE ? OR i.nombre LIKE ? OR i.motivo_baja LIKE ?)';
+            $like = "%{$buscar}%";
+            array_push($params, $like, $like, $like);
+        }
+
+        $where = 'WHERE ' . implode(' AND ', $condiciones);
+
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM instrumentos i $where");
+        $stmt->execute($params);
+        $total = (int)$stmt->fetchColumn();
+
+        $sql = "
+            SELECT i.id, i.num_inventario, i.nombre, i.condicion,
+                   COALESCE(u.nombre, 'Sin asignar') AS ubicacion,
+                   i.fecha_baja, i.motivo_baja
+            FROM instrumentos i
+            LEFT JOIN ubicaciones u ON u.id = i.ubicacion_id
+            $where
+            ORDER BY i.fecha_baja DESC
+            LIMIT $porPagina OFFSET $offset
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        $datos = $stmt->fetchAll();
+
+        echo json_encode([
+            'ok'           => true,
+            'datos'        => $datos,
+            'total'        => $total,
+            'pagina'       => $pagina,
+            'porPagina'    => $porPagina,
+            'totalPaginas' => (int)ceil($total / $porPagina),
+        ]);
+        break;
+
+    case 'restaurar':
+        requerirAdministrador();
+        $id = (int)($_POST['id'] ?? 0);
+
+        if (!$id) {
+            http_response_code(422);
+            echo json_encode(['ok' => false, 'error' => 'Instrumento no válido.']);
+            break;
+        }
+
+        $stmt = $pdo->prepare('SELECT id, activo FROM instrumentos WHERE id = ?');
+        $stmt->execute([$id]);
+        $instrumento = $stmt->fetch();
+
+        if (!$instrumento) {
+            http_response_code(404);
+            echo json_encode(['ok' => false, 'error' => 'El instrumento no existe.']);
+            break;
+        }
+        if ((int)$instrumento['activo'] === 1) {
+            http_response_code(409);
+            echo json_encode(['ok' => false, 'error' => 'Este instrumento no está dado de baja.']);
+            break;
+        }
+
+        // Al restaurar, el instrumento vuelve al catálogo activo como
+        // "disponible" (no se conoce con certeza en qué estado logístico
+        // quedó antes de la baja, y "disponible" es el único punto de
+        // partida seguro: no se puede asumir que sigue "en_uso" ni que
+        // sigue "en_reparacion"). Se limpian fecha_baja y motivo_baja
+        // porque, una vez restaurado, el instrumento ya no está "de baja":
+        // dejar esos campos con su último valor se leería como si siguiera
+        // dado de baja, aunque activo vuelva a valer 1.
+        $stmt = $pdo->prepare("
+            UPDATE instrumentos
+            SET activo = 1, estado = 'disponible', fecha_baja = NULL, motivo_baja = NULL
+            WHERE id = ?
+        ");
+        $stmt->execute([$id]);
+        echo json_encode(['ok' => true, 'mensaje' => 'Instrumento restaurado. Ya está disponible en el catálogo.']);
         break;
 
     case 'kpis':
